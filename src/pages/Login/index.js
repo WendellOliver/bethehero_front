@@ -9,7 +9,7 @@ import logo from "../../assets/Logo.png";
 import picture from "../../assets/OmniStack11.png";
 
 export default function Login() {
-  const { id, setId } = useState("");
+  const [id, setId] = useState("");
   const history = useHistory();
 
   async function handleLogin(e) {
