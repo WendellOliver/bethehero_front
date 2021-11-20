@@ -12,14 +12,16 @@ export default function Occurrences() {
   const value = localStorage.getItem("#be_the_hero:value");
 
   return (
-    <div className="occ-conteiner">
+    <div className="occ-container">
       <div className="occ-content">
         <header>
           <img className="logo" src={logo} alt="" />
           <h1>Bem vindo, {name}</h1>
-          <button className="button" type="submit">
-            Cadastrar novo caso
-          </button>
+          <Link to="/regocc">
+            <button className="button" type="submit">
+              Cadastrar novo caso
+            </button>
+          </Link>
           <Link to="/">
             <button className="logoff" type="submit" href="/">
               <img src={desligar} alt="" />

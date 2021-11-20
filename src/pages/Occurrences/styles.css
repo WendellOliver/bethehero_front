@@ -1,4 +1,4 @@
-.occ-conteiner {
+.occ-container {
   width: 100%;
   max-width: 1120px;
   height: 100vh;
@@ -7,13 +7,13 @@
   display: flex;
 }
 
-.occ-conteiner header {
+.occ-container header {
   width: 100%;
   height: 100px;
   display: flex;
 }
 
-.occ-conteiner header .logo {
+.occ-container header .logo {
   height: 62.73333740234375px;
   width: 144px;
   left: 160px;
@@ -27,7 +27,7 @@
   bottom: 92.8%;
 }
 
-.occ-conteiner header h1 {
+.occ-container header h1 {
   height: 18px;
   width: 100%;
   font-size: 20px;
@@ -38,7 +38,7 @@
   top: 6%;
 }
 
-.occ-conteiner header .button {
+.occ-container header .button {
   position: absolute;
   width: 262px;
   height: 44px;
@@ -47,7 +47,7 @@
   line-height: 24px;
 }
 
-.occ-conteiner header .logoff {
+.occ-container header .logoff {
   position: absolute;
   width: 44px;
   height: 44px;
@@ -57,12 +57,12 @@
   border: 1.5px solid #b2b2b8;
 }
 
-.occ-conteiner header .logoff img {
+.occ-container header .logoff img {
   width: 24px;
   height: 24px;
 }
 
-.occ-conteiner .occ-content .box {
+.occ-container .occ-content .box {
   height: 314px;
   width: 543px;
   margin-top: 14px;
@@ -74,11 +74,11 @@
   background: rgba(255, 255, 255, 1);
 }
 
-.occ-conteiner .occ-content .box .box-content {
+.occ-container .occ-content .box .box-content {
   padding: 5%;
 }
 
-.occ-conteiner .occ-content .box .box-content h2,
+.occ-container .occ-content .box .box-content h2,
 h3,
 p {
   margin: 5px;
