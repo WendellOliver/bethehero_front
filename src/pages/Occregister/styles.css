@@ -2,11 +2,11 @@
   width: 100%;
   max-width: 1120px;
   height: 100vh;
-  margin: 0 auto; /*conteudo centralizado*/
+  margin: 0 auto;
 
-  display: flex; /*itens alinhados um ao lado do outro*/
-  align-items: center; /*alinhamento ao centro verticalmente*/
-  justify-content: center; /*linhamento ao centro horizontalmente*/
+  display: flex; 
+  align-items: center;
+  justify-content: center; 
 }
 
 .register-container .content {
@@ -17,7 +17,7 @@
   border-radius: 8px;
 
   display: flex;
-  justify-content: space-between; /*adiciona um espaço entre os itens*/
+  justify-content: space-between; 
   align-items: center;
 }
 

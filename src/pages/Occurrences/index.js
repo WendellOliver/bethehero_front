@@ -1,49 +1,93 @@
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { FiPower, FiTrash2 } from "react-icons/fi";
 
-import logo from "../../assets/Logo.png";
-import desligar from "../../assets/desligar.png";
-
+import api from "../../services/api";
 import "../Occurrences/styles.css";
 
+import logo from "../../assets/Logo.png";
+
 export default function Occurrences() {
-  const name = localStorage.getItem("#be_the_hero:ongName");
-  const title = localStorage.getItem("#be_the_hero:tytle");
-  const description = localStorage.getItem("#be_the_hero:description");
-  const value = localStorage.getItem("#be_the_hero:value");
+  const [incidents, setIncidents] = useState([]);
+  const history = useHistory();
+
+  const ongName = localStorage.getItem("#be_the_hero:ongName");
+  const ongToken = localStorage.getItem("#be_the_hero:ongToken");
+
+  useEffect(() => {
+    api
+      .get("incidents", {
+        headers: {
+          Authorization: `Bearer ${ongToken}`,
+        },
+      })
+      .then((response) => {
+        setIncidents(response.data.incidents);
+      });
+  }, []);
+
+  async function handleDeleteIncident(id) {
+    try {
+      await api.delete(`incidents/${id}`, {
+        headers: {
+          Authorization: `Bearer ${ongToken}`,
+        },
+      });
+
+      setIncidents(incidents.filter((incident) => incident.id !== id));
+    } catch (err) {
+      alert("Erro ao deletar, favor tente novamente");
+    }
+  }
+
+  function handleLogout() {
+    localStorage.clear();
+
+    history.push("/");
+  }
 
   return (
-    <div className="occ-container">
-      <div className="occ-content">
-        <header>
-          <img className="logo" src={logo} alt="" />
-          <h1>Bem vindo, {name}</h1>
-          <Link to="/regocc">
-            <button className="button" type="submit">
-              Cadastrar novo caso
-            </button>
-          </Link>
-          <Link to="/">
-            <button className="logoff" type="submit" href="/">
-              <img src={desligar} alt="" />
-            </button>
-          </Link>
-        </header>
-        <div className="occ-box-wrapper">
-          <h1>Casos Cadastrasdos</h1>
-          <div className="box">
-            <div className="box-content">
-              <h2>Caso:</h2>
-              <h3>{title}</h3>
+    <div className="profile-container">
+      <header>
+        <img src={logo} alt="Be The Hero" />
+        <span>Bem vinda, {ongName}</span>
 
-              <h2>Descrição:</h2>
-              <p>{description}</p>
+        <Link className="button" to="/regocc">
+          Cadastrar novo caso
+        </Link>
+        <button onClick={handleLogout} type="button">
+          <FiPower size={18} color="#E02041" />
+        </button>
+      </header>
 
-              <h2>Valor:</h2>
-              <h3>{value}</h3>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h1>Casos castrados</h1>
+
+      <ul>
+        {incidents.map((incident) => (
+          <li key={incident.id}>
+            <strong>CASO: {incident.id}</strong>
+            <p>{incident.title}</p>
+
+            <strong>DESCRIÇÃO:</strong>
+            <p>{incident.description}</p>
+
+            <strong>VALOR:</strong>
+            <p>
+              {Intl.NumberFormat("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+              }).format(incident.value)}
+            </p>
+
+            <button
+              onClick={() => handleDeleteIncident(incident.id)}
+              type="button"
+            >
+              <FiTrash2 size={20} color="#a8a8b3" />
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

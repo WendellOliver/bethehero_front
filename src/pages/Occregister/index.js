@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import logo from "../../assets/Logo.png";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
+import api from "../../services/api";
 import "./styles.css";
 
 export default function Occregister() {
@@ -10,8 +11,29 @@ export default function Occregister() {
   const [description, setDescription] = useState("");
   const [value, setValue] = useState("");
 
+  const ongToken = localStorage.getItem("#be_the_hero:ongToken");
+  const history = useHistory();
+
   async function handleRegister(e) {
     e.preventDefault();
+
+    const data = {
+      title,
+      description,
+      value,
+    };
+
+    try {
+      await api.post("incidents", data, {
+        headers: {
+          Authorization: "Bearer " + ongToken,
+        },
+      });
+
+      history.push("/occ");
+    } catch (err) {
+      alert("Erro no cadastro do caso, tente novamente");
+    }
   }
 
   return (
